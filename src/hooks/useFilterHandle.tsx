@@ -1,18 +1,17 @@
 import { useState, useEffect, useCallback } from "react";
 
-export function useFilterHandle(filterVariants: any, callback: any) {
+export function useFilterHandle(filterVariants: any, callback: Function) {
   const [filters, setFilters] = useState(filterVariants);
-
-  const onFilter = useCallback((name: any, value = "all") => {
+  const onFilter = useCallback((name: string, value = "all") => {
     if (
       value === "all" ||
       value === "" ||
       value === null ||
       value === undefined
     ) {
-      setFilters((values: any) => ({ ...values, [name]: undefined }));
+      setFilters((values: {}) => ({ ...values, [name]: undefined }));
     } else {
-      setFilters((values: any) => ({
+      setFilters((values: {}) => ({
         ...values,
         [name]: value,
         history: undefined,
@@ -21,8 +20,8 @@ export function useFilterHandle(filterVariants: any, callback: any) {
   }, []);
 
   useEffect(() => {
-      callback({ filters });
-  }, [filters]);
+    callback({ filters });
+  },[]);
 
   return [filters, onFilter, setFilters];
 }

@@ -1,19 +1,19 @@
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import { Badge, Box, ButtonGroup, IconButton, Image } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
-import { IUser } from "../models/User";
+import { IUser, IUserFilter } from "../models/User";
 import { useStore } from "../store";
 
 interface IUserCard {
   user: IUser;
-  filters: any;
+  filters: IUserFilter;
 }
 
 const UserCard = ({ user, filters }: IUserCard) => {
   const navigate = useNavigate();
-  const { userStore } = useStore();
+  const { usersStore } = useStore();
   const handleDelete = (id: number) => {
-    userStore.deleteUserAsync(id).then(() => userStore.getUsersAsync(filters));
+    usersStore.deleteUserAsync(id).then(() => usersStore.getUsersAsync(filters));
   };
   const profilePicture =
     user.gender == "Male"

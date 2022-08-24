@@ -1,18 +1,19 @@
-import React from "react";
 import ReactDOM from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
+import { ChakraProvider } from "@chakra-ui/react";
+import RootStore, { StoreProvider } from "./store";
+import "antd/dist/antd.css";
 import App from "./App";
 import "./index.css";
-import store, { StoreContext } from "./store";
-import { BrowserRouter } from "react-router-dom";
-import "antd/dist/antd.css";
-import { ChakraProvider } from "@chakra-ui/react";
+
+const store = new RootStore();
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <StoreContext.Provider value={store}>
+  <StoreProvider store={store}>
     <BrowserRouter>
       <ChakraProvider>
         <App />
       </ChakraProvider>
     </BrowserRouter>
-  </StoreContext.Provider>
+  </StoreProvider>
 );

@@ -1,46 +1,6 @@
 {
   "users": [
     {
-      "id": 23,
-      "first_name": "Dasi",
-      "last_name": "Hayford",
-      "email": "dhayfordm@joomla.org",
-      "gender": "Female",
-      "ip_address": "88.11.212.247"
-    },
-    {
-      "id": 24,
-      "first_name": "Henry",
-      "last_name": "Eggerton",
-      "email": "heggertonn@wisc.edu",
-      "gender": "Male",
-      "ip_address": "211.124.111.215"
-    },
-    {
-      "id": 25,
-      "first_name": "Vania",
-      "last_name": "Bryce",
-      "email": "vbryceo@senate.gov",
-      "gender": "Female",
-      "ip_address": "69.133.212.194"
-    },
-    {
-      "id": 26,
-      "first_name": "Vergil",
-      "last_name": "Vickerstaff",
-      "email": "vvickerstaffp@google.pl",
-      "gender": "Male",
-      "ip_address": "90.1.238.187"
-    },
-    {
-      "id": 27,
-      "first_name": "Jessee",
-      "last_name": "Georgeon",
-      "email": "jgeorgeonq@java.com",
-      "gender": "Male",
-      "ip_address": "107.223.25.48"
-    },
-    {
       "id": 28,
       "first_name": "Emilio",
       "last_name": "Bedborough",
@@ -79,14 +39,6 @@
       "email": "hhamblettv@cafepress.com",
       "gender": "Male",
       "ip_address": "45.9.80.136"
-    },
-    {
-      "id": 33,
-      "first_name": "Nikola",
-      "last_name": "Dampney",
-      "email": "ndampneyw@xrea.com",
-      "gender": "Male",
-      "ip_address": "43.6.176.136"
     },
     {
       "id": 34,

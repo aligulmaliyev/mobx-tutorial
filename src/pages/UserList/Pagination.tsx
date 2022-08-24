@@ -10,7 +10,6 @@ import {
 import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
 
 const UserPagination = ({
-  pages,
   pagesCount,
   currentPage,
   handlePageChange,
@@ -36,7 +35,7 @@ const UserPagination = ({
           gap={2}
           separator={<PaginationSeparator w={10} bg="gray.300" />}
         >
-          {pages.map((page: number) => (
+          {Array.from<number>(pagesCount).map((page: number) => (
             <PaginationPage
               w={10}
               key={`pagination_page_${page}`}

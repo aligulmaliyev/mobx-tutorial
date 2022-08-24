@@ -1,25 +1,27 @@
-import {
-  get,
-  makeAutoObservable,
-  makeObservable,
-  observable,
-  runInAction,
-} from "mobx";
-import { IUser } from "../models/User";
+import { makeAutoObservable, runInAction } from "mobx";
+import { IUser, IUserFilter } from "../models/User";
 import UserService from "../services/UserService";
 import { filterQueryResolver } from "../utils/filterQueryResolver";
+import { BaseStore } from "./BaseStore";
 
-class UserStore {
+class UserStore implements BaseStore {
   userService: UserService;
   users: IUser[] = [];
   user!: IUser;
   count: number = 0;
-
   status: string = "initial";
 
   constructor() {
     this.userService = new UserService();
     makeAutoObservable(this);
+  }
+  load() {
+    const filters = {
+      _page: 1,
+      _limit: 10,
+    };
+    this.getUsersAsync(filters);
+    this.getUsersCountAsync();
   }
 
   getUsersCountAsync = async () => {
@@ -35,7 +37,7 @@ class UserStore {
     }
   };
 
-  getUsersAsync = async (filters?: any) => {
+  getUsersAsync = async (filters?: IUserFilter) => {
     try {
       const query = filterQueryResolver(filters);
       const data = await this.userService.getList(query);
@@ -104,4 +106,4 @@ class UserStore {
   };
 }
 
-export default new UserStore();
+export default UserStore;

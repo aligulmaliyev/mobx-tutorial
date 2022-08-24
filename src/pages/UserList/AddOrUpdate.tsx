@@ -7,7 +7,7 @@ import { useStore } from "../../store";
 import { IUser } from "../../models/User";
 
 const AddOrUpdate = () => {
-  const { userStore } = useStore();
+  const { usersStore } = useStore();
   const navigate = useNavigate();
   const params = useParams();
   const id = Number(params.id);
@@ -25,11 +25,11 @@ const AddOrUpdate = () => {
     initialValues: user,
     onSubmit: (user) => {
       if (id !== -1) {
-        userStore.updateUserAsync(user).then(() => userStore.getUsersAsync());
+        usersStore.updateUserAsync(user).then(() => usersStore.getUsersAsync());
         navigate("/users");
       } else {
         user.id = Math.ceil(Math.random() * 2000);
-        userStore.createUserAsync(user).then(() => userStore.getUsersAsync());
+        usersStore.createUserAsync(user).then(() => usersStore.getUsersAsync());
         navigate("/users");
       }
     },
@@ -37,8 +37,8 @@ const AddOrUpdate = () => {
 
   useEffect(() => {
     if (id !== -1) {
-      userStore.getUserAsync(id).then(() => {
-        setUser(userStore.user);
+      usersStore.getUserAsync(id).then(() => {
+        setUser(usersStore.user);
       });
     }
   }, [id]);

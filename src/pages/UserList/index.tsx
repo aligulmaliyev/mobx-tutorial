@@ -9,9 +9,10 @@ import UserCard from "../../components/UserCard";
 import { useFormik } from "formik";
 import { usePagination } from "@ajna/pagination";
 import UserPagination from "./Pagination";
+import { IUserFilter } from "../../models/User";
 
 function UserList() {
-  const { userStore } = useStore();
+  const { usersStore } = useStore();
   const [filters, onFilter] = useFilterHandle(
     {
       _page: 1,
@@ -23,43 +24,34 @@ function UserList() {
       ip_address: undefined,
     },
     ({ filters }: any) => {
-      userStore.getUsersAsync(filters);
+      usersStore.getUsersAsync(filters);
     }
   );
-  const formik = useFormik({
+  const formik = useFormik<IUserFilter>({
     enableReinitialize: true,
     initialValues: filters,
-    onSubmit: (user) => {
-      userStore.getUsersAsync(user);
+    onSubmit: (filters: IUserFilter) => {
+      usersStore.getUsersAsync(filters);
     },
   });
 
-  const [usersTotal, setUsersTotal] = useState<number | undefined>(1);
+  const [usersTotal, setUsersTotal] = useState<number>(1);
 
-  const { pages, pagesCount, currentPage, setCurrentPage, pageSize } =
-    usePagination({
-      total: usersTotal,
-      limits: {
-        outer: 5,
-        inner: 5,
-      },
-      initialState: {
-        pageSize: usersTotal,
-        currentPage: 1,
-      },
-    });
-
-  useEffect(() => {
-    userStore.getUsersAsync(filters);
-  }, [currentPage, pageSize]);
+  const { pagesCount, currentPage, setCurrentPage, pageSize } = usePagination({
+    total: usersTotal,
+    limits: {
+      outer: 5,
+      inner: 5,
+    },
+    initialState: {
+      pageSize: usersTotal,
+      currentPage: 1,
+    },
+  });
 
   useEffect(() => {
-    userStore.getUsersCountAsync();
-  }, []);
-
-  useEffect(() => {
-    setUsersTotal(userStore.count / 10);
-  }, [userStore.count]);
+    setUsersTotal(usersStore.count / 10);
+  }, [usersStore.count]);
 
   const handlePageChange = (nextPage: number): void => {
     onFilter("_page", nextPage);
@@ -89,7 +81,7 @@ function UserList() {
           templateRows="repeat(2, 1fr)"
           gap={5}
         >
-          {userStore.users.map((user) => (
+          {usersStore.users.map((user) => (
             <GridItem key={user.id}>
               <UserCard user={user} filters={filters} />
             </GridItem>
@@ -100,7 +92,6 @@ function UserList() {
         <Center>
           <Stack>
             <UserPagination
-              pages={pages}
               pagesCount={pagesCount}
               currentPage={currentPage}
               handlePageChange={handlePageChange}
