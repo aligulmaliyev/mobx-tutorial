@@ -3,7 +3,7 @@ import { api } from "./api";
 const USER_API = api + "users";
 
 class UserService {
-  getList = async (query: string) => {
+  getList = async (query: string="") => {
     const options = {
       method: "GET",
     };

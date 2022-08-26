@@ -3,12 +3,12 @@ import { createContext, ReactNode, useContext } from "react";
 import UserStore from "./UserStore";
 
 export class RootStore {
-  usersStore: UserStore;
+  userStore: UserStore;
 
   constructor() {
     makeAutoObservable(this);
-    this.usersStore = new UserStore();
-    this.usersStore.load();
+    this.userStore = new UserStore();
+    this.userStore.load();
   }
 }
 

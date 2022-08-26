@@ -10,6 +10,8 @@ export interface IUser {
 export interface IUserFilter {
   _page?: number;
   _limit?: number;
+  _sort?: string;
+  _order?: "asc" | "desc";
   first_name?: string;
   last_name?: string;
   email?: string;

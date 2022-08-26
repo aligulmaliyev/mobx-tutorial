@@ -10,13 +10,10 @@
     "server": "json-server --watch db/db.json"
   },
   "dependencies": {
-    "@ajna/pagination": "^1.4.19",
-    "@chakra-ui/icons": "^2.0.8",
-    "@chakra-ui/react": "^2.2.8",
+    "@ant-design/icons": "^4.7.0",
     "@emotion/react": "^11.10.0",
     "@emotion/styled": "^11.10.0",
     "antd": "^4.22.7",
-    "formik": "^2.2.9",
     "framer-motion": "^6.5.1",
     "mobx": "^6.6.1",
     "mobx-react-lite": "^3.4.0",

@@ -10,23 +10,40 @@ class UserStore implements BaseStore {
   user!: IUser;
   count: number = 0;
   status: string = "initial";
+  filters: IUserFilter = {};
 
   constructor() {
     this.userService = new UserService();
     makeAutoObservable(this);
   }
-  load() {
-    const filters = {
+  load(
+    filters: IUserFilter = {
       _page: 1,
-      _limit: 10,
-    };
-    this.getUsersAsync(filters);
+      _limit: 8,
+    }
+  ) {
+    this.filters = { ...this.filters, ...filters };
+    this.getUsersAsync(this.filters);
     this.getUsersCountAsync();
   }
 
+  getLocaleAddOrDelete = (user: IUser, cancel: boolean = false) => {
+    if (!cancel) {
+      runInAction(() => {
+        this.users = [user, ...this.users];
+      });
+    }
+    if (cancel) {
+      runInAction(() => {
+        const newUsers = this.users.filter((user) => user.id !== -1);
+        this.users = newUsers;
+      });
+    }
+  };
+
   getUsersCountAsync = async () => {
     try {
-      const data = await this.userService.getList("");
+      const data = await this.userService.getList();
       runInAction(() => {
         this.count = data?.length;
       });
